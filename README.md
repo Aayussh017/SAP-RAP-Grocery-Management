@@ -113,23 +113,3 @@ Navigation via UUID
 Standard SAP Fiori Elements layout
 
 No custom UI coding (annotation-driven UI)
-
-📂 Repository Structure
-SAP-RAP-Grocery-Management/
-│
-├── cds/
-│   ├── Z_I_GROCERY_PRJ.abap          # Interface CDS View
-│   ├── Z_C_GROCERY_PRJ.abap          # Consumption CDS View
-│   └── Z_C_GROCERY_PRJ_UI.abap       # Metadata Extension
-│
-├── behavior/
-│   ├── Z_I_GROCERY_PRJ.behavior      # Behavior Definition
-│   └── ZBP_I_GROCERY_PRJ.abap        # Behavior Implementation
-│
-├── db/
-│   └── ZGRC_DATA.abap                # Database Table
-│
-├── util/
-│   └── ZCL_INSERT_GROCERY_DATA.abap  # Test data class
-│
-└── screenshot
