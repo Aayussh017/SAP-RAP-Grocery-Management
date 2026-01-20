@@ -1,0 +1,26 @@
+@AccessControl.authorizationCheck: #NOT_REQUIRED
+@EndUserText.label: 'GROCERY INTERFACE VIEW CDS'
+@Metadata.ignorePropagatedAnnotations: true
+define root view entity  Z_I_GROCERY_PRJ as select from zgrc_data
+{
+
+    key id,
+        product,
+        category,
+        brand,
+        
+        @Semantics.amount.currencyCode : 'currency'
+        price,
+        currency,
+        quantity,
+        purchasedate,
+        expirationdate,
+        expired,
+        rating,
+        note,
+        createdby,
+        createddat,
+        lastchangedby,
+        lastchangeddat,
+        locallastchanged
+}

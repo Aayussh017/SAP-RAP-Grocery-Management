@@ -1,0 +1,48 @@
+@EndUserText.label: 'Grocery Consumption View'
+@AccessControl.authorizationCheck: #NOT_REQUIRED
+
+@ObjectModel.usageType.serviceQuality: #X
+@ObjectModel.usageType.sizeCategory: #S
+@ObjectModel.usageType.dataClass: #MIXED
+@Metadata.allowExtensions: true
+
+define root view entity Z_C_GROCERY_PRJ
+  provider contract transactional_query  
+  as projection on Z_I_GROCERY_PRJ 
+{
+        @EndUserText.label: 'Grocery ID'
+        key id,
+        @EndUserText.label: 'Product'
+        product,
+        @EndUserText.label: 'Category'
+        category,
+        @EndUserText.label: 'Brand'
+        brand,
+        @EndUserText.label: 'Price'
+        @Semantics.amount.currencyCode : 'currency'
+        price,
+        @EndUserText.label: 'Currency'
+        currency,
+        @EndUserText.label: 'Quantity'
+        quantity,
+        @EndUserText.label: 'Purchase Date'
+        purchasedate,
+        @EndUserText.label: 'Expiration Date'
+        expirationdate,
+        @EndUserText.label: 'Expired'
+        expired,
+        @EndUserText.label: 'Rating'
+        rating,
+        @EndUserText.label: 'Note'
+        note,
+        @EndUserText.label: 'Created By'
+        createdby,
+        @EndUserText.label: 'Created Date '
+        createddat,
+        @EndUserText.label: 'Last Changed By'
+        lastchangedby,
+        @EndUserText.label: 'Last Changed Date '
+        lastchangeddat,
+        @EndUserText.label: 'Local Last Changed '
+        locallastchanged
+}

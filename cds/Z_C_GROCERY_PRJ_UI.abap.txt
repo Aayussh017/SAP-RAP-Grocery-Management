@@ -1,0 +1,44 @@
+@Metadata.layer: #PARTNER 
+annotate entity Z_C_GROCERY_PRJ with {
+     @UI.lineItem: [{ position:10 , label: 'Grocery Id'}] 
+     @UI.identification: [{ position:10 , label: 'Grocery Id' } ] 
+     id; 
+     
+     @UI.lineItem:[{ position:20 , label: 'Product'}] 
+     @UI.identification: [{ position:20 , label: 'Product' } ] 
+     product;
+     
+     @UI.lineItem:[{ position:30 , label: 'Category'}] 
+     @UI.identification: [{ position:30 , label: 'Category' } ] 
+     category; 
+     
+     @UI.lineItem:[{ position:40 , label: 'Brand'}]
+      @UI.identification: [{ position:40 , label: 'Brand' } ] 
+      brand; 
+      
+      @UI.lineItem:[{ position:50 , label: 'Price'}]
+      @UI.identification: [{ position:50 , label: 'Price' } ] 
+      price;
+      
+      @UI.lineItem:[{ position:60 , label: 'Currency'}]
+      @UI.identification: [{ position:60 , label: 'Currency' } ] 
+      currency;
+      
+      @UI.lineItem:[{ position:70 , label: 'Quantity'}] 
+      @UI.identification: [{ position:70 , label: 'Quantity' } ] 
+      quantity; 
+      
+      @UI.lineItem:[{ position:80 , label: 'Purchase Date'}] 
+      purchasedate;
+      
+      @UI.lineItem:[{ position:90 , label: 'Expiration Date'}] 
+      expirationdate; 
+      
+      @UI.lineItem:[{ position:100 , label: 'Expired'}] 
+      expired; 
+      
+      @UI.lineItem:[{ position:110 , label: 'Rating'}] 
+      rating; 
+      
+      @UI.lineItem:[{ position:120 , label: 'Note'}] 
+      note; }

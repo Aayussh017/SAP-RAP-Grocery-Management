@@ -1,0 +1,20 @@
+managed implementation in class zbp_i_grocery_prj unique;
+strict ( 2 );
+
+define behavior for Z_I_GROCERY_PRJ //alias <alias_name>
+persistent table zgrc_data
+lock master
+authorization master ( instance )
+//etag master <field_name>
+{
+  create ( authorization : global );
+  update;
+  delete;
+
+  field ( numbering : managed , readonly ) id;
+
+  determination calc_expired on modify { create ; update; }
+
+  action markExpired result[1] $self;
+
+}

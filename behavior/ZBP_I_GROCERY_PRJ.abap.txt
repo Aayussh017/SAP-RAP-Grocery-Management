@@ -1,0 +1,76 @@
+CLASS lhc_Z_I_GROCERY_PRJ DEFINITION INHERITING FROM cl_abap_behavior_handler.
+  PRIVATE SECTION.
+
+    METHODS get_instance_authorizations FOR INSTANCE AUTHORIZATION
+      IMPORTING keys REQUEST requested_authorizations FOR z_i_grocery_prj RESULT result.
+
+    METHODS get_global_authorizations FOR GLOBAL AUTHORIZATION
+      IMPORTING REQUEST requested_authorizations FOR z_i_grocery_prj RESULT result.
+
+    METHODS markExpired FOR MODIFY
+      IMPORTING keys FOR ACTION z_i_grocery_prj~markExpired RESULT result.
+
+    METHODS calc_expired FOR DETERMINE ON MODIFY
+      IMPORTING keys FOR z_i_grocery_prj~calc_expired.
+
+ENDCLASS.
+
+CLASS lhc_Z_I_GROCERY_PRJ IMPLEMENTATION.
+
+  METHOD get_instance_authorizations.
+  ENDMETHOD.
+
+  METHOD get_global_authorizations.
+  ENDMETHOD.
+
+  METHOD markExpired.
+
+    MODIFY ENTITIES OF Z_I_GROCERY_PRJ
+    IN LOCAL MODE
+    ENTITY Z_I_GROCERY_PRJ
+    UPDATE FIELDS   ( expired )
+    WITH VALUE #(
+        FOR KEY IN KEYS (
+        ID = KEY-ID
+        EXPIRED = ABAP_TRUE  )  ).
+
+    RESULT = VALUE #(
+    FOR KEY IN KEYS (
+    %TKY = KEY-%TKY  ) ).
+
+
+
+
+
+
+  ENDMETHOD.
+
+  METHOD calc_expired.
+    DATA(lv_today) = cl_abap_context_info=>get_system_date( ).
+
+    READ ENTITIES OF z_i_grocery_prj
+      IN LOCAL MODE
+      ENTITY z_i_grocery_prj
+      ALL FIELDS
+      WITH CORRESPONDING #( keys )
+      RESULT DATA(lt_data).
+
+    LOOP AT lt_data ASSIGNING FIELD-SYMBOL(<ls_data>).
+
+      IF <ls_data>-expirationdate IS NOT INITIAL
+         AND <ls_data>-expirationdate < lv_today.
+        <ls_data>-expired = abap_true.
+      ELSE.
+        <ls_data>-expired = abap_false.
+      ENDIF.
+
+    ENDLOOP.
+
+    MODIFY ENTITIES OF z_i_grocery_prj
+      IN LOCAL MODE
+      ENTITY z_i_grocery_prj
+      UPDATE FIELDS ( expired )
+      WITH CORRESPONDING #( lt_data ).
+  ENDMETHOD.
+
+ENDCLASS.

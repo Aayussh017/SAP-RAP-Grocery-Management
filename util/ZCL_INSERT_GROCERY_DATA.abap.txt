@@ -1,0 +1,90 @@
+CLASS zcl_insert_grocery_data DEFINITION
+  PUBLIC
+  FINAL
+  CREATE PUBLIC .
+
+  PUBLIC SECTION.
+    INTERFACES if_oo_adt_classrun.
+  PROTECTED SECTION.
+  PRIVATE SECTION.
+ENDCLASS.
+
+
+
+CLASS zcl_insert_grocery_data IMPLEMENTATION.
+    METHOD if_oo_adt_classrun~main.
+
+    DATA lt_grocery TYPE STANDARD TABLE OF zgrc_data.
+    DATA lv_today   TYPE d.
+
+    lv_today = cl_abap_context_info=>get_system_date( ).
+
+    "---------------------------------------------
+    " Clean old test data
+    "---------------------------------------------
+    DELETE FROM zgrc_data.
+    COMMIT WORK.
+
+    TRY.
+
+        " Record 1 – Dairy
+        APPEND VALUE zgrc_data(
+          id             = cl_system_uuid=>create_uuid_x16_static( )
+          product        = 'Milk'
+          category       = 'Dairy'
+          brand          = 'Amul'
+          price          = '65.00'
+          currency       = 'INR'
+          quantity       = 2
+          purchasedate   = lv_today
+          expirationdate = lv_today + 5
+          rating         = 4
+          note           = 'Fresh milk'
+        ) TO lt_grocery.
+
+        " Record 2 – Bakery
+        APPEND VALUE zgrc_data(
+          id             = cl_system_uuid=>create_uuid_x16_static( )
+          product        = 'Bread'
+          category       = 'Bakery'
+          brand          = 'Britannia'
+          price          = '40.00'
+          currency       = 'INR'
+          quantity       = 1
+          purchasedate   = lv_today - 10
+          expirationdate = lv_today + 9 
+          rating         = 3
+          note           = 'Whole wheat bread'
+        ) TO lt_grocery.
+
+        " Record 3 – Beverage
+        APPEND VALUE zgrc_data(
+          id             = cl_system_uuid=>create_uuid_x16_static( )
+          product        = 'Orange Juice'
+          category       = 'Beverage'
+          brand          = 'Real'
+          price          = '120.00'
+          currency       = 'INR'
+          quantity       = 1
+          purchasedate   = lv_today
+          expirationdate = lv_today + 30
+          rating         = 5
+          note           = 'No added sugar'
+        ) TO lt_grocery.
+
+      CATCH cx_uuid_error INTO DATA(lx_uuid).
+        out->write( |UUID generation failed: { lx_uuid->get_text( ) }| ).
+        RETURN.
+    ENDTRY.
+
+    "---------------------------------------------
+    " Insert fresh test data
+    "---------------------------------------------
+    INSERT zgrc_data FROM TABLE @lt_grocery.
+    COMMIT WORK.
+
+    out->write( |Test grocery data refreshed successfully| ).
+
+  ENDMETHOD.
+
+ENDCLASS.

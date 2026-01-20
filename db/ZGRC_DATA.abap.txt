@@ -1,0 +1,27 @@
+@EndUserText.label : 'ALL GROCERY DATABASE TABLE'
+@AbapCatalog.enhancement.category : #NOT_EXTENSIBLE
+@AbapCatalog.tableCategory : #TRANSPARENT
+@AbapCatalog.deliveryClass : #A
+@AbapCatalog.dataMaintenance : #RESTRICTED
+define table zgrc_data {
+
+  key client       : abap.clnt not null;
+  key id           : sysuuid_x16 not null;
+  product          : abap.char(40);
+  category         : abap.char(40);
+  brand            : abap.char(40);
+  currency         : abap.cuky;
+  price            : abap.dec(10,2);
+  quantity         : abap.int2;
+  purchasedate     : abap.dats;
+  expirationdate   : abap.dats;
+  expired          : abap_boolean;
+  rating           : abap.fltp;
+  note             : abap.char(250);
+  createdby        : abp_creation_user;
+  createddat       : tzntstmpl;
+  lastchangedby    : abp_lastchange_user;
+  lastchangeddat   : abp_lastchange_tstmpl;
+  locallastchanged : abp_locinst_lastchange_tstmpl;
+
+}
